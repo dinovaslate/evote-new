@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="dibarco.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="navbar">
+        <div class="logo">
+          moonzher
+        </div>
+        <div id="login-info" style="position: relative">
+          <a href="/login.html" class="account">Login</a>
+        </div>
+      </div>
+      <div class="headline">
+        <h1>Welcome</h1>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+          veritatis provident voluptate dolore facere. Delectus consequuntur
+          repudiandae rem fugit. Itaque tenetur unde pariatur accusantium amet
+          ipsa corrupti optio, quo obcaecati.
+        </p>
+        <div class="has-dropdown">
+          <div class="big-button" id="action">
+            <div class="left">Choose Vote</div>
+            <div class="right">&#x25BC;</div>
+          </div>
+          <div class="dropdown" id="dd1">
+            <div class="dropdown-item">Voting Osis</div>
+            <div class="dropdown-item">Voting MPK</div>
+          </div>
+        </div>
+      </div>
+      <div class="decorate"></div>
+    </div>
+    <div class="art"></div>
+    <div class="footer">&copy; Moonzher</div>
+    <script>
+      const height = document.querySelector('#dd1').offsetHeight;
+      document
+        .querySelector('#dd1')
+        .style.setProperty('--height', `${height}px`);
+      document.querySelector('#dd1').style.setProperty('max-height', 0);
+      document.querySelector('#action').addEventListener('click', (e) => {
+        if (e.currentTarget.contains(e.target))
+          document.querySelector('#dd1').classList.toggle('active');
+        e.currentTarget.classList.toggle('active');
+      });
+
+      const token = localStorage.getItem("token");
+      const displayName = localStorage.getItem("displayName");
+      if (token && displayName) {
+        document.querySelector("#login-info").innerHTML = `
+          <div class="account">${displayName}</div>
+          <div id="logout" class="account logout">Logout</div>
+        `;
+
+        document.querySelector("#logout").addEventListener("click", () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("displayName");
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>
